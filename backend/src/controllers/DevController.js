@@ -41,13 +41,23 @@ module.exports = {
     }
 
     return response.json(dev);
-  }
+  },
 
   /*
   Para atualizar um dev
   async update() {},
-
-  Para deletar um dev
-  async destroy() {}
   */
+ 
+  // Para deletar um dev
+  async destroy(request, response) {
+    const { github_username } = request.params;
+    
+    const dev = await Dev.deleteOne({ github_username });
+
+    if (dev.deletedCount !== 0) {
+      return response.json({ status: "Desenvolvedor deletado com sucesso!" });
+    } else {
+      return response.json({ status: "Erro ao deletar desenvolvedor com sucesso!" });
+    }
+  }
 };

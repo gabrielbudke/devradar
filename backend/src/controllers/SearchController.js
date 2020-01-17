@@ -6,8 +6,8 @@ module.exports = {
     // Buscar todos os devs num raio de 10km
     // Filtrar por tecnologias
     const { latitude, longitude, techs } = request.query;
+    
     const techsArray = parseStringAsArray(techs);
-    console.log(techsArray);
 
     const devs = await Dev.find({
       techs: {
