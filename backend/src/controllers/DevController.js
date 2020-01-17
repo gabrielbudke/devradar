@@ -1,6 +1,6 @@
 const axios = require("axios");
 const Dev = require("../models/Dev");
-
+const parseStringAsArray = require("../utils/parseStringAsArray");
 // index, show, store, update, destroy
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
 
       const { name = login, bio, avatar_url } = apiResponse.data;
 
-      const techsArray = techs.split(",").map(tech => tech.trim());
+      const techsArray = parseStringAsArray(techs);
 
       const location = {
         type: "Point",
@@ -42,4 +42,12 @@ module.exports = {
 
     return response.json(dev);
   }
+
+  /*
+  Para atualizar um dev
+  async update() {},
+
+  Para deletar um dev
+  async destroy() {}
+  */
 };
